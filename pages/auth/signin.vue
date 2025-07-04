@@ -10,6 +10,7 @@
           <h1 class="text-h4 text-center mb-6" style="color: white;">Login</h1>
 
           <v-text-field
+            :rules="[rules.required, rules.min]"
             label="Email"
             prepend-icon="mdi-email"
             color="primary"
@@ -19,13 +20,17 @@
           ></v-text-field>
 
           <v-text-field
+            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="[rules.required, rules.min]"
+            :type="show4 ? 'text' : 'password'"
             label="Password"
             prepend-icon="mdi-lock"
-            type="password"
             color="primary"
             class="mb-4"
             v-model="password"
             outlined
+            @click:append="show4 = !show4"
+            
           ></v-text-field>
 
           <v-checkbox
@@ -48,6 +53,7 @@
           <div class="text-center mb-4">
             <p style="color: white;">or</p>
           </div>
+          
 
           <div class="google-btn-wrapper">
             <v-btn
@@ -55,9 +61,10 @@
               class="ma-2"
               elevation="2"
               @click="signInWithGoogle"
+              block
             >
               <v-icon left>mdi-google</v-icon>
-              Google
+              Sign in with Google
             </v-btn>
           </div>
         </v-card-text>
@@ -67,8 +74,6 @@
 </template>
 
 <script>
-import { auth, provider, signInWithPopup } from '~/plugins/firebase'
-
 export default {
   layout: 'auth',
   data() {
@@ -76,23 +81,27 @@ export default {
       email: '',
       password: '',
       rememberMe: false,
-    }
-  },
-  methods: {
-    signIn() {
-      console.log('Email:', this.email, 'Password:', this.password, 'Remember me:', this.rememberMe)
-    },
-    async signInWithGoogle() {
-      try {
-        const result = await signInWithPopup(auth, provider)
-        const user = result.user
-        console.log('✅ Google user:', user)
-        this.$router.push('/dashboard')
-      } catch (error) {
-        console.error('❌ Google sign-in failed:', error.message)
+      show4: false,
+      rules: {
+          required: value => !!value || 'Required.',
       }
     }
-  }
+  },
+  // methods: {
+  //   signIn() {
+  //     console.log('Email:', this.email, 'Password:', this.password, 'Remember me:', this.rememberMe)
+  //   },
+  //   async signInWithGoogle() {
+  //     try {
+  //       const result = await signInWithPopup(auth, provider)
+  //       const user = result.user
+  //       console.log('✅ Google user:', user)
+  //       this.$router.push('/dashboard')
+  //     } catch (error) {
+  //       console.error('❌ Google sign-in failed:', error.message)
+  //     }
+  //   }
+  // }
 }
 </script>
 

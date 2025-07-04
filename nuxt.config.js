@@ -1,9 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-   plugins: [
-    '~/plugins/firebase.js'
-  ],
+   
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -43,8 +41,22 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
+  modules: ['@nuxtjs/axios',
+            '@nuxtjs/auth-next'
   ],
+  auth: {
+  strategies: {
+    google: {
+      clientId: '681717550297-bk6cjku423t99fr3kd7vfvjlmtmiibo3.apps.googleusercontent.com',
+      codeChallengeMethod: '',
+        responseType: 'code',
+        endpoints: {
+          token: 'http://localhost:8000/user/google/',
+          userInfo: 'http://localhost:8000/auth/user/'
+        },
+    },
+  }
+},
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
