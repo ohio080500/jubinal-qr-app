@@ -10,7 +10,6 @@
           <h1 class="text-h4 text-center mb-6" style="color: white;">Login</h1>
 
           <v-text-field
-            :rules="[rules.required, rules.min]"
             label="Email"
             prepend-icon="mdi-email"
             color="primary"
@@ -20,16 +19,14 @@
           ></v-text-field>
 
           <v-text-field
-            :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="[rules.required, rules.min]"
-            :type="show4 ? 'text' : 'password'"
+            
             label="Password"
             prepend-icon="mdi-lock"
             color="primary"
             class="mb-4"
             v-model="password"
             outlined
-            @click:append="show4 = !show4"
+            
             
           ></v-text-field>
 
@@ -45,7 +42,6 @@
             elevation="2"
             block
             class="mb-6"
-            @click="signIn"
           >
             Sign In
           </v-btn>
@@ -60,8 +56,7 @@
               color="red darken-1"
               class="ma-2"
               elevation="2"
-              @click="signInWithGoogle"
-              block
+              @click="signInWithGoogle()"
             >
               <v-icon left>mdi-google</v-icon>
               Sign in with Google
@@ -76,32 +71,12 @@
 <script>
 export default {
   layout: 'auth',
-  data() {
-    return {
-      email: '',
-      password: '',
-      rememberMe: false,
-      show4: false,
-      rules: {
-          required: value => !!value || 'Required.',
-      }
+  middleware: 'guest',
+  methods:{
+    signInWithGoogle(){
+      this.$auth.loginWith('google')
     }
-  },
-  // methods: {
-  //   signIn() {
-  //     console.log('Email:', this.email, 'Password:', this.password, 'Remember me:', this.rememberMe)
-  //   },
-  //   async signInWithGoogle() {
-  //     try {
-  //       const result = await signInWithPopup(auth, provider)
-  //       const user = result.user
-  //       console.log('✅ Google user:', user)
-  //       this.$router.push('/dashboard')
-  //     } catch (error) {
-  //       console.error('❌ Google sign-in failed:', error.message)
-  //     }
-  //   }
-  // }
+  }
 }
 </script>
 

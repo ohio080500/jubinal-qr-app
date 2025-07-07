@@ -45,17 +45,32 @@ export default {
             '@nuxtjs/auth-next'
   ],
   auth: {
+    redirect:{
+      login: '/auth/signin',
+      logout: '/auth/signin',
+      callback: '/auth/callback',
+      home:'/'
+    },
+    autoFetchUser: false,
   strategies: {
     google: {
       clientId: '681717550297-bk6cjku423t99fr3kd7vfvjlmtmiibo3.apps.googleusercontent.com',
-      codeChallengeMethod: '',
-        responseType: 'code',
-        endpoints: {
-          token: 'http://localhost:8000/user/google/',
-          userInfo: 'http://localhost:8000/auth/user/'
-        },
+      scheme:'oauth2',
+      endpints:{
+        authorization: "https://accounts.google/com/o/oauth2/auth",
+        userInfo: "https://www.googleapis.com/oauth2/v3/userInfo",
+      },
+      token:{
+        property: "access_token",
+        type: "Bearer",
+        maxAge: 1800,
+      },
+      reponseType: "token id_token",
+      scope: ["openid","profile","email"],
+      redirectUri: "http://localhost:3000/auth/callback",
+      codeChallengeMethod: "",
     },
-  }
+  },
 },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
