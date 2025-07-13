@@ -56,8 +56,8 @@ export default {
     google: {
       clientId: '681717550297-bk6cjku423t99fr3kd7vfvjlmtmiibo3.apps.googleusercontent.com',
       scheme:'oauth2',
-      endpints:{
-        authorization: "https://accounts.google/com/o/oauth2/auth",
+      endpoints:{
+        authorization: "https://accounts.google.com/o/oauth2/auth",
         userInfo: "https://www.googleapis.com/oauth2/v3/userInfo",
       },
       token:{
@@ -65,7 +65,7 @@ export default {
         type: "Bearer",
         maxAge: 1800,
       },
-      reponseType: "token id_token",
+      responseType: "token id_token",
       scope: ["openid","profile","email"],
       redirectUri: "http://localhost:3000/auth/callback",
       codeChallengeMethod: "",
