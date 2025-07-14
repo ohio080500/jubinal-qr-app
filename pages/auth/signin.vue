@@ -14,7 +14,6 @@
             prepend-icon="mdi-email"
             color="primary"
             class="mb-4"
-            v-model="email"
             outlined
           ></v-text-field>
 
@@ -24,18 +23,11 @@
             prepend-icon="mdi-lock"
             color="primary"
             class="mb-4"
-            v-model="password"
+            type="password"
             outlined
             
             
           ></v-text-field>
-
-          <v-checkbox
-            label="Remember me"
-            color="primary"
-            class="mb-4"
-            v-model="rememberMe"
-          ></v-checkbox>
 
           <v-btn
             color="primary"
@@ -75,6 +67,7 @@ export default {
   methods:{
     signInWithGoogle(){
       this.$auth.loginWith('google')
+      console.log("Signin with google")
     }
   }
 }
