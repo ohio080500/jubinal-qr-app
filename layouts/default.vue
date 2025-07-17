@@ -108,7 +108,12 @@ export default {
           icon: 'mdi-apps',
           title: 'signin',
           to: '/auth/signin'
-        }
+        },
+        {
+          icon: 'mdi-apps',
+          title: 'QrScan',
+          to: '/QrScan'
+        },
       ],
       miniVariant: false,
       right: true,
