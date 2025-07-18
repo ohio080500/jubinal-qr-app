@@ -29,6 +29,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -67,7 +68,7 @@ export default {
       },
       responseType: "token id_token",
       scope: ["openid","profile","email"],
-      redirectUri: "http://localhost:3000/auth/callback",
+      redirectUri: process.env.REDIRECT_URI,
       codeChallengeMethod: "",
     },
   },
