@@ -114,11 +114,7 @@ export default {
           title: 'QrScan',
           to: '/QrScan'
         },
-        {
-          icon: 'mdi-apps',
-          title: 'Tracker',
-          to: '/mouseTracker'
-        },
+        
       ],
       miniVariant: false,
       right: true,

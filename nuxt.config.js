@@ -1,49 +1,47 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-   
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  mode: 'spa',
+  /*
+  ** Headers of the page
+  */
   head: {
-    titleTemplate: '%s - bsit3a-systeminteg',
-    title: 'bsit3a-systeminteg',
-    htmlAttrs: {
-      lang: 'en'
-    },
+    titleTemplate: '%s - ' + process.env.npm_package_name,
+    title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#fff' },
+  /*
+  ** Global CSS
+  */
   css: [
   ],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  /*
+  ** Plugins to load before mounting the App
+  */
   plugins: [
-
   ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  /*
+  ** Nuxt.js dev-modules
+  */
   buildModules: [
-    // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
+  /*
+  ** Nuxt.js modules
+  */
   modules: ['@nuxtjs/axios',
-            '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next'
   ],
   auth: {
     redirect:{
@@ -53,12 +51,13 @@ export default {
       home:'/'
     },
     autoFetchUser: false,
-  strategies: {
-    google: {
+    strategies: {
+      google: {
       clientId: '681717550297-bk6cjku423t99fr3kd7vfvjlmtmiibo3.apps.googleusercontent.com',
       scheme:'oauth2',
       endpoints:{
-        authorization: "https://accounts.google.com/o/oauth2/auth",
+        authorization: 'https://accounts.google.com/o/oauth2/auth',
+        token: 'https://oauth2.googleapis.com/token',
         userInfo: "https://www.googleapis.com/oauth2/v3/userinfo",
       },
       token:{
@@ -68,13 +67,16 @@ export default {
       },
       responseType: "token id_token",
       scope: ["openid","profile","email"],
-      redirectUri: process.env.REDIRECT_URI,
+      redirectUri: "http://localhost:3000/auth/callback",
       codeChallengeMethod: "",
     },
+    },
   },
-},
 
-  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
+  /*
+  ** vuetify module configuration
+  ** https://github.com/nuxt-community/vuetify-module
+  */
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -92,8 +94,14 @@ export default {
       }
     }
   },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  /*
+  ** Build configuration
+  */
   build: {
+    /*
+    ** You can extend webpack config here
+    */
+    extend (config, ctx) {
+    }
   }
 }
