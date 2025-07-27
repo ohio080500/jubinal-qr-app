@@ -53,7 +53,7 @@ export default {
     autoFetchUser: false,
     strategies: {
       google: {
-      clientId: '681717550297-bk6cjku423t99fr3kd7vfvjlmtmiibo3.apps.googleusercontent.com',
+      clientId: process.env.CLIENT_ID,
       scheme:'oauth2',
       endpoints:{
         authorization: 'https://accounts.google.com/o/oauth2/auth',
